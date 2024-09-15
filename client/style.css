@@ -1,3 +1,14 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
+
+#themeToggle {
+    background-color: #00b33c; 
+    color: black;             
+    border: none;              
+    padding: 10px 15px;    
+    border-radius: 5px;        
+    cursor: pointer;           
+    transition: background-color 0.3s; 
+  }
+  
