@@ -12,3 +12,11 @@ body {
     transition: background-color 0.3s; 
   }
   
+#themeToggle:hover {
+  background-color: #00b33c; 
+}
+
+.dark-mode {
+  background-color: #333;
+  color: white;
+}
