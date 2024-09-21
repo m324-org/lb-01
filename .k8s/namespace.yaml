@@ -1,0 +1,4 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: m324-csbe1 # Ask the teacher for the namespace name

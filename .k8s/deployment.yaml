@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: m324-csbe1
+  name: lb01-jl-mb-deployment
+  labels:
+    app: lb01-jl-mb
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: lb01-jl-mb
+  template:
+    metadata:
+      labels:
+        app: lb01-jl-mb
+    spec:
+      containers:
+        - name: lb01-jl-mb
+          image: jl115/lb01-jl-mb:latest
+          command:
+            - /bin/sh
+            - "-c"
+            - yarn start
+          ports:
+            - containerPort: 3000 # Ensure this matches your app's exposed port
+          env:
+            - name: NODE_ENV
+              value: "production"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          startupProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            failureThreshold: 5
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: "/"
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            failureThreshold: 3
+            periodSeconds: 5
