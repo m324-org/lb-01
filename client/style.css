@@ -1,34 +1,31 @@
 body {
-    font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 #themeToggle {
-    background-color: #00b33c; 
-    color: black;             
-    border: none;              
-    padding: 10px 15px;    
-    border-radius: 5px;        
-    cursor: pointer;           
-    transition: background-color 0.3s; 
-  }
-  
-#themeToggle:hover {
   background-color: #00b33c; 
+  color: black;             
+  border: none;              
+  padding: 10px 15px;    
+  border-radius: 5px;        
+  cursor: pointer;           
+  transition: background-color 0.3s; 
+}
+
+#themeToggle:hover {
+  background-color: #007acc; 
 }
 
 .dark-mode {
-  background-color: #333;
-  color: white;
+  background-color: #121212;
+  color: #000000;
 }
 
-.dark-mode .bg-blue-500 {
-    background-color: #007acc;
-  }
-  
-  .dark-mode .bg-gray-300 {
-    background-color: #444;
-  }
-  
-  .dark-mode .text-white {
-    color: #ddd;
-  }
+.dark-mode .chat-container {
+  background-color: #1e1e1e;
+}
+
+.dark-mode .message {
+  background-color: #333;
+  color: #ffffff;
+}
