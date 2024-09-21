@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lb01-jl-mb
+  namespace: m324-csbe1
+spec:
+  ports:
+    - port: 80
+      targetPort: 3000 # Adjust to 3000 to match your container's port please
+      protocol: TCP
+  selector:
+    app: lb01-jl-mb
