@@ -22,7 +22,7 @@
     <!-- Main chat container -->
     <div class="w-full h-screen flex justify-center">
         <div class="max-w-2xl w-full md:w-3/4 lg:w-2/4 flex flex-col">
-            <div class="bg-green-500 px-4 py-4 rounded-b flex justify-between items-center">
+            <div class="bg-blue-500 px-4 py-4 rounded-b flex justify-between items-center">
                 <p class="text-lg font-bold text-white">Chat - M324</p>
                 <div class="flex items-center">
                     <span class="text-white mr-2">Dark Mode:</span>
@@ -32,33 +32,31 @@
                     </label>
                 </div>
             </div>
+
             <div class="flex-grow flex flex-col justify-start p-4 gap-4 overflow-auto" id="messages">
-                <p id="typingUsers" class="text-sm italic text-gray-500"></p>
                 <!-- Messages will be dynamically populated here -->
             </div>
+
+            <!-- Typing status -->
+            <p id="typingStatus" class="text-sm italic text-gray-500 mt-2"></p>
+
             <div class="bg-gray-100 px-4 py-4 flex items-center rounded-t">
                 <input 
                 id="messageInput" 
                 type="text" 
                 placeholder="Type a message"
-                class="flex-grow px-4 py-2 rounded-full border-gray-200 focus:outline-none focus:ring- text-black-500 focus:to-blue-500"
+                class="flex-grow px-4 py-2 rounded-full border-gray-200 focus:outline-none focus:ring text-black-500 focus:to-blue-500"
                 />
                 <button 
-                class="ml-4 text-green-500 hover:bg-green-500 focus:outline-none" 
+                class="ml-4 text-blue-500 hover:bg-blue-500 focus:outline-none" 
                 id="sendButton">
                     <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     class="h-6 w-6" 
                     fill="none" 
                     viewBox="0 0 24 24" 
-                    stroke="currentColor"
-                    >
-                        <path 
-                        stroke-linecap="round" 
-                        stroke-linejoin="round" 
-                        stroke-width="2" 
-                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                        />
+                    stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
                     </svg>
                 </button>
             </div>

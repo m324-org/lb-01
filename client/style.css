@@ -1,17 +1,17 @@
 body {
-    font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 #themeToggle {
-    background-color: #00b33c; 
-    color: black;             
-    border: none;              
-    padding: 10px 15px;    
-    border-radius: 5px;        
-    cursor: pointer;           
-    transition: background-color 0.3s; 
-  }
-  
+  background-color: #00b33c; 
+  color: black;             
+  border: none;              
+  padding: 10px 15px;    
+  border-radius: 5px;        
+  cursor: pointer;           
+  transition: background-color 0.3s; 
+}
+
 #themeToggle:hover {
   background-color: #00b33c; 
 }
@@ -22,13 +22,57 @@ body {
 }
 
 .dark-mode .bg-blue-500 {
-    background-color: #007acc;
-  }
-  
-  .dark-mode .bg-gray-300 {
-    background-color: #444;
-  }
-  
-  .dark-mode .text-white {
-    color: #ddd;
-  }
+  background-color: #007acc;
+}
+
+.dark-mode .bg-gray-300 {
+  background-color: #444;
+}
+
+.dark-mode .text-white {
+  color: #ddd;
+}
+
+input#messageInput::placeholder {
+  color: #007acc; /* Blaue Farbe für den Platzhaltertext */
+}
+
+.message {
+  background-color: #007acc;
+  color: #ffffff; 
+  padding: 8px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  max-width: 50%; 
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.bg-gray-100 {
+  display: flex;
+  align-items: center; /* Elemente in der Mitte vertikal ausrichten */
+}
+
+input#messageInput {
+  flex-grow: 1; /* Das Eingabefeld nimmt den verbleibenden Platz ein */
+  margin-right: 10px; /* Abstand zwischen Eingabefeld und Button */
+}
+
+button#sendButton {
+  flex-shrink: 0; /* Verhindert, dass der Button schrumpft */
+  margin-left: auto; /* Der Button bleibt rechts */
+}
+
+/* Allgemeine Einstellungen für den "Schreibt gerade"-Text */
+#typingStatus {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  text-align: left; 
+  color: gray; /* Standardfarbe für den "Schreibt gerade"-Text im normalen Modus */
+}
+
+/* Dark Mode Einstellungen für den "Schreibt gerade"-Text */
+.dark-mode #typingStatus {
+  color: white; /* Farbe für den "Schreibt gerade"-Text im Dark Mode */
+}
