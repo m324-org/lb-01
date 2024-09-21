@@ -29,3 +29,7 @@ body {
   background-color: #333;
   color: #ffffff;
 }
+
+input#messageInput::placeholder {
+  color: #007acc; /* Blaue Farbe für den Platzhaltertext */
+}
