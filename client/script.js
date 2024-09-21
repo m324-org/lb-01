@@ -21,6 +21,7 @@
         break;
       case 'activeUsers':
         activeUsers = message.users;
+        updateActiveUsersList(activeUsers);
         break;
       case 'typing':
         typingUsers = message.users;
@@ -29,7 +30,7 @@
         break;
     }
   });
- 
+
   socket.addEventListener('close', () => {
     console.log('WebSocket closed.');
     const usersList = document.getElementById('activeUsers');
@@ -44,7 +45,7 @@
   const updateActiveUsersList = (users) => {
     const usersList = document.getElementById('activeUsers');
     usersList.innerHTML = ''; // Leere die Liste zuerst
-    users.forEach(user => {
+    users.forEach((user) => {
       const userElement = document.createElement('li');
       userElement.textContent = user.name;
       usersList.appendChild(userElement);
@@ -53,9 +54,7 @@
 
   const updateTypingUsers = (users) => {
     const typingElement = document.getElementById('typingUsers');
-    typingElement.textContent = users.length > 0 
-      ? `${users.map(u => u.name).join(', ')} is/are typing...` 
-      : '';
+    typingElement.textContent = users.length > 0 ? `${users.map((u) => u.name).join(', ')} is/are typing...` : '';
   };
 
   // Wait until the DOM is loaded before adding event listeners
