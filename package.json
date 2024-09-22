@@ -6,7 +6,9 @@
   "scripts": {
     "build": "rimraf ./build && tsc",
     "dev": "npx nodemon",
-    "start": "node build/index.js"
+    "start": "node build/index.js",
+    "lint": "eslint --ext .ts src",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
