@@ -3,7 +3,7 @@
 ## Prerequisites
 
 - Docker
-- Node >= 18.x
+- Node >= 20.x
 
 ## Get Started
 
