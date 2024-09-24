@@ -45,7 +45,7 @@ input#messageInput::placeholder {
   border-radius: 4px;
   max-width: 50%; 
   word-break: break-word;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
   white-space: pre-wrap;
 }
 
@@ -75,4 +75,10 @@ button#sendButton {
 /* Dark Mode Einstellungen für den "Schreibt gerade"-Text */
 .dark-mode #typingStatus {
   color: white; /* Farbe für den "Schreibt gerade"-Text im Dark Mode */
+}
+
+.message {
+  width: 100%;
+  line-break: anywhere;
+  display: contents;
 }
