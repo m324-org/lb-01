@@ -1,0 +1,60 @@
+name: CD Pipeline
+
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - closed
+
+jobs:
+  build:
+    runs-on:
+      group: default
+    steps:
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Docker image
+        run: docker build -t jl115/lb01-jl-mb -f Dockerfile .
+
+      - name: Push Docker image
+        run: docker push jl115/lb01-jl-mb
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'v1.28.0'
+
+      - name: Set kubeconfig
+        run: echo "${{ secrets.KUBECONFIG }}" | base64 -d > $HOME/.kube/config
+
+      - name: Deploy to Kubernetes
+        run: kubectl apply -f .k8s/deployment.yaml
+
+      - name: Deploy Ingress
+        run: kubectl apply -f .k8s/ingress.yaml
+
+      - name: Deploy Service
+        run: kubectl apply -f .k8s/service.yaml
+
+      - name: Deploy Persistent Volume
+        run: kubectl apply -f .k8s/uptime-kuma-pvc.yaml
+
+      - name: Deploy uptime-kuma
+        run: kubectl apply -f .k8s/uptime-kuma-deployment.yaml
+
+      - name: Deploy uptime-kuma-service
+        run: kubectl apply -f .k8s/uptime-kuma-service.yaml
+
+      - name: Deploy uptime-kuma-ingress
+        run: kubectl apply -f .k8s/uptime-kuma-ingress.yaml
+
+      - name: Verify Deployment
+        run: kubectl rollout status deployment/lb01-jl-mb-deployment
+
+      - name: Verify Uptime Kuma Deployment
+        run: kubectl rollout status deployment/uptime-kuma-deployment

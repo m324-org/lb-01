@@ -11,15 +11,26 @@ body {
   cursor: pointer;           
   transition: background-color 0.3s; 
 }
+ 
 
 #themeToggle:hover {
-  background-color: #00b33c; 
+  background-color: #007acc; 
 }
 
 .dark-mode {
-  background-color: #333;
-  color: white;
+  background-color: #121212;
+  color: #000000;
 }
+
+.dark-mode .chat-container {
+  background-color: #1e1e1e;
+}
+
+.dark-mode .message {
+  background-color: #333;
+  color: #ffffff;
+}
+
 
 .dark-mode .bg-blue-500 {
   background-color: #007acc;
