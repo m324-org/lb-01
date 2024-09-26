@@ -48,7 +48,7 @@
   const updateActiveUsersList = (users) => {
     const usersList = document.getElementById('activeUsers');
     usersList.innerHTML = ''; // Leere die Liste zuerst
-    users.forEach(user => {
+    users.forEach((user) => {
       const userElement = document.createElement('li');
       userElement.textContent = user.name;
       usersList.appendChild(userElement);
