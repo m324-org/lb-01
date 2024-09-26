@@ -41,5 +41,20 @@ jobs:
       - name: Deploy Service
         run: kubectl apply -f .k8s/service.yaml
 
+      - name: Deploy Persistent Volume
+        run: kubectl apply -f .k8s/uptime-kuma-pvc.yaml
+
+      - name: Deploy uptime-kuma
+        run: kubectl apply -f .k8s/uptime-kuma-deployment.yaml
+
+      - name: Deploy uptime-kuma-service
+        run: kubectl apply -f .k8s/uptime-kuma-service.yaml
+
+      - name: Deploy uptime-kuma-ingress
+        run: kubectl apply -f .k8s/uptime-kuma-ingress.yaml
+
       - name: Verify Deployment
         run: kubectl rollout status deployment/lb01-jl-mb-deployment
+
+      - name: Verify Uptime Kuma Deployment
+        run: kubectl rollout status deployment/uptime-kuma-deployment
