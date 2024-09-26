@@ -2,12 +2,14 @@
   const myUser = await generateRandomUser();
   let activeUsers = [];
   let typingUsers = [];
+  let typingTimeout;
 
   const socket = new WebSocket(generateBackendUrl());
   socket.addEventListener('open', () => {
     console.log('WebSocket connected!');
     socket.send(JSON.stringify({ type: 'newUser', user: myUser }));
   });
+
   socket.addEventListener('message', (event) => {
     const message = JSON.parse(event.data);
     console.log('WebSocket message:', message);
@@ -25,6 +27,7 @@
         break;
       case 'typing':
         typingUsers = message.users;
+        updateTypingUsers(typingUsers);
         break;
       default:
         break;
@@ -53,32 +56,34 @@
   };
 
   const updateTypingUsers = (users) => {
-    const typingElement = document.getElementById('typingUsers');
-    typingElement.textContent = users.length > 0 ? `${users.map((u) => u.name).join(', ')} is/are typing...` : '';
+    const typingElement = document.getElementById('typingStatus');
+    typingElement.textContent = users.length > 0 
+      ? `${users.map(u => u.name).join(', ')} is typing...` 
+      : '';
   };
 
-  // Wait until the DOM is loaded before adding event listeners
   document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('themeToggle');
+    const messageInput = document.getElementById('messageInput');
+    const typingStatus = document.getElementById('typingStatus');
+
     themeToggle.addEventListener('change', (event) => {
       document.body.classList.toggle('dark-mode', event.target.checked);
     });
 
-    document.getElementById('sendButton').addEventListener('click', () => {
-      const message = document.getElementById('messageInput').value;
-      socket.send(JSON.stringify({ type: 'message', message, user: myUser }));
-      document.getElementById('messageInput').value = '';
+    messageInput.addEventListener('keydown', () => {
+      clearTimeout(typingTimeout);
+      socket.send(JSON.stringify({ type: 'typing', user: myUser }));
+      typingTimeout = setTimeout(() => {
+        typingStatus.textContent = ""; // "Schreibt gerade" nach einer Pause leeren
+      }, 9000); // Nach 10 Sekunde keine Eingabe wird "Schreibt gerade" ausgeblendet
     });
 
-    document.addEventListener('keydown', (event) => {
-      if (event.key.length === 1) {
-        socket.send(JSON.stringify({ type: 'typing', user: myUser }));
-      }
-      if (event.key === 'Enter') {
-        const message = document.getElementById('messageInput').value;
-        socket.send(JSON.stringify({ type: 'message', message, user: myUser }));
-        document.getElementById('messageInput').value = '';
-      }
+    document.getElementById('sendButton').addEventListener('click', () => {
+      const message = messageInput.value;
+      socket.send(JSON.stringify({ type: 'message', message, user: myUser }));
+      messageInput.value = '';
+      typingStatus.textContent = ""; // "Schreibt gerade"-Status zurücksetzen
     });
   });
 })();
