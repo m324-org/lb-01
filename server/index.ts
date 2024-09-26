@@ -31,6 +31,15 @@ app.use(express.static('client'));
 app.get('/', (req: Request, res: Response) => {
   res.sendFile(__dirname + '/client/index.html');
 });
+
+// route for the chat page
+app.get('/health', (req: Request, res: Response) => {
+  res.status(200).send({
+    status: 'OK',
+    message: 'Server is up and running',
+  });
+});
+
 // Initialize the websocket server
 initializeWebsocketServer(server);
 
